@@ -1,0 +1,16 @@
+rootProject.name = 'bicyclo'
+
+def settingsDir=System.getProperty("user.dir")
+
+FileTree componentTree = fileTree(dir:"$settingsDir/components/")
+componentTree.include('**/*.gradle')
+
+componentTree.each{File gradleFile ->
+    def compDir = gradleFile.parentFile
+    def compName = gradleFile.name.replaceFirst(~/\.[^.]+$/, '')
+    include compName
+
+    def thisSubProject = project(":$compName")
+    thisSubProject.projectDir = compDir
+    thisSubProject.buildFileName = gradleFile.name
+}

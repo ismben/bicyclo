@@ -39,3 +39,7 @@ dist/**/*
 
 # Ignore output from coverage report
 coverage
+
+
+#database csv exception
+!db.csv
